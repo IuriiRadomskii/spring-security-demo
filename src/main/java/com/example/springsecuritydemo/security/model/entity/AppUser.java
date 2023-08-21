@@ -1,13 +1,11 @@
-package com.example.reactdemoback.security.model.entity;
+package com.example.springsecuritydemo.security.model.entity;
 
-import com.example.reactdemoback.model.entity.UserProfile;
-import com.example.reactdemoback.security.enums.UserAuthorities;
-import com.example.reactdemoback.security.enums.UserRoles;
+import com.example.springsecuritydemo.model.entity.UserProfile;
+import com.example.springsecuritydemo.security.enums.UserAuthorities;
+import com.example.springsecuritydemo.security.enums.UserRoles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.CurrentTimestamp;
-import org.hibernate.annotations.Target;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

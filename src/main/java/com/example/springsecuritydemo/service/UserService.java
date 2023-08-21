@@ -1,18 +1,16 @@
-package com.example.reactdemoback.service;
+package com.example.springsecuritydemo.service;
 
-import com.example.reactdemoback.dto.UserProfileDto;
-import com.example.reactdemoback.exceptions.AppUserNotFoundException;
-import com.example.reactdemoback.model.entity.UserProfile;
-import com.example.reactdemoback.model.repository.UserProfileRepository;
-import com.example.reactdemoback.security.exception.AlreadyExistsException;
-import com.example.reactdemoback.security.model.repository.AppUserRepository;
-import com.example.reactdemoback.service.mappers.UserProfileMapper;
+import com.example.springsecuritydemo.dto.UserProfileDto;
+import com.example.springsecuritydemo.exceptions.AppUserNotFoundException;
+import com.example.springsecuritydemo.model.entity.UserProfile;
+import com.example.springsecuritydemo.model.repository.UserProfileRepository;
+import com.example.springsecuritydemo.security.exception.AlreadyExistsException;
+import com.example.springsecuritydemo.security.model.repository.AppUserRepository;
+import com.example.springsecuritydemo.service.mappers.UserProfileMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Slf4j
 @Service

@@ -1,4 +1,4 @@
-package com.example.reactdemoback.exceptions;
+package com.example.springsecuritydemo.exceptions;
 
 public class AppUserNotFoundException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package com.example.reactdemoback.model.repository;
+package com.example.springsecuritydemo.model.repository;
 
-import com.example.reactdemoback.model.entity.UserProfile;
+import com.example.springsecuritydemo.model.entity.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

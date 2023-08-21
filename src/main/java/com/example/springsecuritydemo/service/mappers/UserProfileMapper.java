@@ -1,7 +1,7 @@
-package com.example.reactdemoback.service.mappers;
+package com.example.springsecuritydemo.service.mappers;
 
-import com.example.reactdemoback.dto.UserProfileDto;
-import com.example.reactdemoback.model.entity.UserProfile;
+import com.example.springsecuritydemo.dto.UserProfileDto;
+import com.example.springsecuritydemo.model.entity.UserProfile;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 

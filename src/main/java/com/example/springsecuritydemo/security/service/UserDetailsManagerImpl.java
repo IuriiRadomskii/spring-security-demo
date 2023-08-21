@@ -1,7 +1,7 @@
-package com.example.reactdemoback.security.service;
+package com.example.springsecuritydemo.security.service;
 
-import com.example.reactdemoback.security.model.entity.AppUser;
-import com.example.reactdemoback.security.model.repository.AppUserRepository;
+import com.example.springsecuritydemo.security.model.entity.AppUser;
+import com.example.springsecuritydemo.security.model.repository.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

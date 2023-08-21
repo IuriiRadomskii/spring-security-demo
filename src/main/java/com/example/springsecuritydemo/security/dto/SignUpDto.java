@@ -1,4 +1,4 @@
-package com.example.reactdemoback.security.dto;
+package com.example.springsecuritydemo.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

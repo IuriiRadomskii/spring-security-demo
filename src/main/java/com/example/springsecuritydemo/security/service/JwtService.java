@@ -1,4 +1,4 @@
-package com.example.reactdemoback.security.service;
+package com.example.springsecuritydemo.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

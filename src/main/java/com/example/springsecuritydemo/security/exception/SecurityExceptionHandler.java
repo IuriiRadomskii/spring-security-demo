@@ -1,4 +1,4 @@
-package com.example.reactdemoback.security.exception;
+package com.example.springsecuritydemo.security.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

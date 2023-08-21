@@ -1,4 +1,4 @@
-package com.example.reactdemoback.controller;
+package com.example.springsecuritydemo.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

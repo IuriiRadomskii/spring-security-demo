@@ -1,6 +1,6 @@
-package com.example.reactdemoback.model.entity;
+package com.example.springsecuritydemo.model.entity;
 
-import com.example.reactdemoback.security.model.entity.AppUser;
+import com.example.springsecuritydemo.security.model.entity.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 

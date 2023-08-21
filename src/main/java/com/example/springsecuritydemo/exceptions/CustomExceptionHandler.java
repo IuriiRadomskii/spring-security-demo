@@ -1,6 +1,6 @@
-package com.example.reactdemoback.exceptions;
+package com.example.springsecuritydemo.exceptions;
 
-import com.example.reactdemoback.security.exception.AlreadyExistsException;
+import com.example.springsecuritydemo.security.exception.AlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

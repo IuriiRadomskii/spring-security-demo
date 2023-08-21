@@ -1,9 +1,9 @@
-package com.example.reactdemoback.controller;
+package com.example.springsecuritydemo.controller;
 
-import com.example.reactdemoback.security.dto.JwtDto;
-import com.example.reactdemoback.security.dto.SignInDto;
-import com.example.reactdemoback.security.dto.SignUpDto;
-import com.example.reactdemoback.security.service.AuthenticationService;
+import com.example.springsecuritydemo.security.dto.JwtDto;
+import com.example.springsecuritydemo.security.dto.SignInDto;
+import com.example.springsecuritydemo.security.dto.SignUpDto;
+import com.example.springsecuritydemo.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

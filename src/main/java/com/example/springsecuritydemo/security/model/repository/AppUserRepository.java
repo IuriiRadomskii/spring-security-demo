@@ -1,6 +1,6 @@
-package com.example.reactdemoback.security.model.repository;
+package com.example.springsecuritydemo.security.model.repository;
 
-import com.example.reactdemoback.security.model.entity.AppUser;
+import com.example.springsecuritydemo.security.model.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

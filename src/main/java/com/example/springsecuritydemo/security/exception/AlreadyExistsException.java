@@ -1,4 +1,4 @@
-package com.example.reactdemoback.security.exception;
+package com.example.springsecuritydemo.security.exception;
 
 public class AlreadyExistsException extends RuntimeException {
     public AlreadyExistsException(String message) {

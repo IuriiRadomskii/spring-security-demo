@@ -1,4 +1,4 @@
-package com.example.reactdemoback.security.enums;
+package com.example.springsecuritydemo.security.enums;
 
 public enum UserAuthorities {
 

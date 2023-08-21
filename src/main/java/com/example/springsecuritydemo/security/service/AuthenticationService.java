@@ -1,14 +1,13 @@
-package com.example.reactdemoback.security.service;
+package com.example.springsecuritydemo.security.service;
 
-import com.example.reactdemoback.security.dto.JwtDto;
-import com.example.reactdemoback.security.dto.SignInDto;
-import com.example.reactdemoback.security.dto.SignUpDto;
-import com.example.reactdemoback.security.exception.AlreadyExistsException;
-import com.example.reactdemoback.security.model.entity.AppUser;
+import com.example.springsecuritydemo.security.dto.JwtDto;
+import com.example.springsecuritydemo.security.dto.SignInDto;
+import com.example.springsecuritydemo.security.dto.SignUpDto;
+import com.example.springsecuritydemo.security.exception.AlreadyExistsException;
+import com.example.springsecuritydemo.security.model.entity.AppUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
-import static com.example.reactdemoback.security.enums.UserAuthorities.PERFORM_ACTION_1;
-import static com.example.reactdemoback.security.enums.UserRoles.ROLE_USER;
+import static com.example.springsecuritydemo.security.enums.UserAuthorities.PERFORM_ACTION_1;
+import static com.example.springsecuritydemo.security.enums.UserRoles.ROLE_USER;
 
 @Slf4j
 @Service
