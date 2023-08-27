@@ -1,10 +1,8 @@
 package com.example.springsecuritydemo.security.service;
 
-import com.example.springsecuritydemo.security.config.JwtTokenCache;
 import com.example.springsecuritydemo.security.dto.JwtDto;
 import com.example.springsecuritydemo.security.dto.SignInDto;
 import com.example.springsecuritydemo.security.dto.SignUpDto;
-import com.example.springsecuritydemo.security.exception.AlreadyExistsException;
 import com.example.springsecuritydemo.security.model.entity.AppUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,23 +28,17 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenCache jwtTokenCache;
 
-    @Transactional(rollbackFor = RuntimeException.class)
     public void signUp(SignUpDto request) {
         log.debug("signUp: {}", request);
         var pass = passwordEncoder.encode(request.getPass());
         var appUser = AppUser
-                .builder()
-                .login(request.getLogin())
-                .pass(pass)
-                .roles(Collections.singletonList(ROLE_USER))
-                .authorities(Collections.singletonList(PERFORM_ACTION_1))
-                .build();
-        try {
-            userDetailsManager.createUser(appUser);
-        } catch (RuntimeException e) {
-            log.warn("Exception while saving user " + request.getLogin(), e);
-            throw new AlreadyExistsException("User already exists");
-        }
+            .builder()
+            .login(request.getLogin())
+            .pass(pass)
+            .roles(Collections.singletonList(ROLE_USER))
+            .authorities(Collections.singletonList(PERFORM_ACTION_1))
+            .build();
+        userDetailsManager.createUser(appUser);
     }
 
     public JwtDto signIn(SignInDto request) {

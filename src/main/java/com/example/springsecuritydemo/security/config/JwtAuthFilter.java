@@ -2,6 +2,7 @@ package com.example.springsecuritydemo.security.config;
 
 import com.example.springsecuritydemo.security.exception.TokenCacheIsDownException;
 import com.example.springsecuritydemo.security.service.JwtService;
+import com.example.springsecuritydemo.security.service.JwtTokenCache;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

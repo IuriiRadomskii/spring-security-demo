@@ -1,8 +1,10 @@
 package com.example.springsecuritydemo.security.service;
 
+import com.example.springsecuritydemo.security.exception.AlreadyExistsException;
 import com.example.springsecuritydemo.security.model.entity.AppUser;
 import com.example.springsecuritydemo.security.model.repository.AppUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +29,14 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     }
 
     @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public void createUser(UserDetails user) {
         AppUser appUser = (AppUser) user;
-        appUserRepository.save(appUser);
+        try {
+            appUserRepository.save(appUser);
+        } catch (DataIntegrityViolationException e) {
+            throw new AlreadyExistsException("User already exists");
+        }
     }
 
     @Override

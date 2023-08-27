@@ -1,4 +1,4 @@
-package com.example.springsecuritydemo.security.config;
+package com.example.springsecuritydemo.security.service;
 
 
 import com.example.springsecuritydemo.security.exception.TokenCacheIsDownException;

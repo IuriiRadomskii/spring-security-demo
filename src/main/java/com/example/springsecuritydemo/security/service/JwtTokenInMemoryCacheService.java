@@ -1,4 +1,4 @@
-package com.example.springsecuritydemo.security.config;
+package com.example.springsecuritydemo.security.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +8,7 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class JwtTokenInMemoryCache implements JwtTokenCache {
+public class JwtTokenInMemoryCacheService implements JwtTokenCache {
 
     private final Map<String, Set<GrantedAuthority>> cache = new HashMap<>();
 
