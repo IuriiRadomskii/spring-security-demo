@@ -1,5 +1,6 @@
 package com.example.springsecuritydemo.security.service;
 
+import com.example.springsecuritydemo.security.config.JwtTokenCache;
 import com.example.springsecuritydemo.security.dto.JwtDto;
 import com.example.springsecuritydemo.security.dto.SignInDto;
 import com.example.springsecuritydemo.security.dto.SignUpDto;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.HashSet;
 
 import static com.example.springsecuritydemo.security.enums.UserAuthorities.PERFORM_ACTION_1;
 import static com.example.springsecuritydemo.security.enums.UserRoles.ROLE_USER;
@@ -27,6 +29,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final UserDetailsManagerImpl userDetailsManager;
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenCache jwtTokenCache;
 
     @Transactional(rollbackFor = RuntimeException.class)
     public void signUp(SignUpDto request) {
@@ -54,6 +57,8 @@ public class AuthenticationService {
             );
             var user = userDetailsManager.loadUserByUsername(request.getLogin());
             var jwt = jwtService.generateToken(user);
+            var jti = jwtService.extractJti(jwt);
+            jwtTokenCache.putAuthoritiesByJti(jti, new HashSet<>(user.getAuthorities()));
             return new JwtDto(jwt);
         } else {
             log.warn("user does not exist");

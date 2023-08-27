@@ -2,30 +2,33 @@ package com.example.springsecuritydemo.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
-    private static String generate36BytesToken() {
-        SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[36];
-        random.nextBytes(bytes);
-        var encoder = java.util.Base64.getUrlEncoder().withoutPadding();
-        return encoder.encodeToString(bytes);
+    private final SecretService secretService;
+
+    public String generateToken(UserDetails userDetails) {
+        return Jwts.builder()
+                .setIssuer("spring security demo")
+                .setId(generateTokenId())
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new java.util.Date(System.currentTimeMillis()))
+                .setExpiration(new java.util.Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(secretService.getKey(), io.jsonwebtoken.SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    private static final String SECRET_KEY = "b90J4s5ftoyhrnOCO1D18n4V3yvTQIpZz5VCFImHCIP4AMrb";
-
-    public String extractLogin(String token) {
-        return extractClaim(token, claims -> claims.getSubject());
+    private Claims extractAllClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(secretService.getKey()).build().parseClaimsJws(token).getBody();
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
@@ -33,31 +36,24 @@ public class JwtService {
         return claimsResolvers.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    public String extractJti(String token) {
+        return extractClaim(token, Claims::getId);
     }
 
-    public Boolean isTokenValid(String token, UserDetails userDetails) {
-        final String login = extractLogin(token);
-        return (login.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public String extractLogin(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
 
-    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        return Jwts.builder()
-                .setIssuer("myself")
-                .setClaims(claims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new java.util.Date(System.currentTimeMillis()))
-                .setExpiration(new java.util.Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
-                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
+    public Boolean isTokenValid(String token) {
+        var builder = Jwts.parserBuilder().setSigningKey(secretService.getKey()).build();
+        return builder.isSigned(token) && isTokenNonExpired(token);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    private boolean isTokenNonExpired(String token) {
+        return !extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
-    private boolean isTokenExpired(String token) {
-        return extractClaim(token, Claims::getExpiration).before(new Date());
+    private String generateTokenId() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

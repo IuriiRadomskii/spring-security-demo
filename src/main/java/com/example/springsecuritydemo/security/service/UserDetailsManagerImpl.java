@@ -21,8 +21,8 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return appUserRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return appUserRepository.findByLogin(login).orElseThrow(
+                () -> new UsernameNotFoundException("User not found"));
     }
 
     @Override
