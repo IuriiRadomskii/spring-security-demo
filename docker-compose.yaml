@@ -1,6 +1,5 @@
 version: "3.8"
 services:
-
   db:
     image: postgres:15
     volumes:
@@ -11,4 +10,7 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - "5432:5432"
-
+  cache:
+    image: redis:7.0
+    ports:
+      - "6379:6379"

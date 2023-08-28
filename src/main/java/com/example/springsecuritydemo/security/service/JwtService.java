@@ -2,6 +2,7 @@ package com.example.springsecuritydemo.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,9 @@ public class JwtService {
     }
 
     public Boolean isTokenValid(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return false;
+        }
         var builder = Jwts.parserBuilder().setSigningKey(secretService.getKey()).build();
         return builder.isSigned(token) && isTokenNonExpired(token);
     }

@@ -26,7 +26,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final UserDetailsManagerImpl userDetailsManager;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenCache jwtTokenCache;
+    private final JwtTokenCache cache;
 
     public void signUp(SignUpDto request) {
         log.debug("signUp: {}", request);
@@ -43,13 +43,15 @@ public class AuthenticationService {
 
     public JwtDto signIn(SignInDto request) {
         if (userDetailsManager.userExists(request.getLogin())) {
-            authenticationManager.authenticate(
+            var auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getLogin(), request.getPass())
             );
             var user = userDetailsManager.loadUserByUsername(request.getLogin());
             var jwt = jwtService.generateToken(user);
             var jti = jwtService.extractJti(jwt);
-            jwtTokenCache.putAuthoritiesByJti(jti, new HashSet<>(user.getAuthorities()));
+            cache.removeSecurityCacheByLogin(auth.getName());
+            cache.putAuthoritiesByLogin(auth.getName(), new HashSet<>(user.getAuthorities()));
+            cache.putJtiByLogin(auth.getName(), jti);
             return new JwtDto(jwt);
         } else {
             log.warn("user does not exist");

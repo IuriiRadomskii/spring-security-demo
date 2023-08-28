@@ -9,8 +9,13 @@ import java.util.Set;
 
 public interface JwtTokenCache {
 
-    Optional<Set<GrantedAuthority>> getAuthoritiesByJti(String jti) throws TokenCacheIsDownException;
+    void putAuthoritiesByLogin(String login, Set<GrantedAuthority> authorities);
 
-    void putAuthoritiesByJti(String jti, Set<GrantedAuthority> authorities);
+    void putJtiByLogin(String login, String jti);
 
+    Optional<Set<GrantedAuthority>> getAuthoritiesByLogin(String login) throws TokenCacheIsDownException;
+
+    Optional<String> getJtiByLogin(String login) throws TokenCacheIsDownException;
+
+    void removeSecurityCacheByLogin(String login);
 }
