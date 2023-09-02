@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsManagerImpl implements UserDetailsManager {
 
     private final AppUserRepository appUserRepository;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

@@ -1,16 +1,11 @@
-version: "3.8"
+version: "3.8"setKeySerializer(RedisSerializer.string());
+		setValueSerializer(RedisSerializer.string());
+		setHashKeySerializer(RedisSerializer.string());
+		setHashValueSerializer(RedisSerializer.string());
 services:
-  db:
-    image: postgres:15
-    volumes:
-      - /home/iuriiradomskii/mounts/react-demo-postgres-data/:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - "5432:5432"
   cache:
     image: redis:7.0
+    volumes:
+      - ./redis:/usr/local/etc/redis/
     ports:
       - "6379:6379"
