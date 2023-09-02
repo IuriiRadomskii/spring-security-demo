@@ -3,12 +3,10 @@ package com.example.springsecuritydemo.security.service;
 import com.example.springsecuritydemo.security.exception.TokenCacheIsDownException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Slf4j
-@Service
 public class JwtTokenInMemoryCacheService implements JwtTokenCache {
 
     private final Map<String, Set<GrantedAuthority>> cache = new HashMap<>();

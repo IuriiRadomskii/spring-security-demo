@@ -1,7 +1,4 @@
-version: "3.8"setKeySerializer(RedisSerializer.string());
-		setValueSerializer(RedisSerializer.string());
-		setHashKeySerializer(RedisSerializer.string());
-		setHashValueSerializer(RedisSerializer.string());
+version: "3.8"
 services:
   cache:
     image: redis:7.0
